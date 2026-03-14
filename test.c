@@ -1,4 +1,14 @@
 #include<stdio.h>
+int add(int a,int b){
+    int carry =0;
+    while(b!=0){
+        carry=a&b;
+        a^=b;
+        b=carry<<1;
+    }
+    return a;
+}
+
 int div(int a,int b){
     int div=b,temp=1,q=0;
     while(a>div){
@@ -7,8 +17,8 @@ int div(int a,int b){
     }
     while(a>=b){
         if(a>=div){
-            a-=div;
-            q+=temp;
+            a=add(a,-div);
+            q=add(q,temp);
         }
         div>>=1;
         temp>>=1;
@@ -21,3 +31,4 @@ int div(int a,int b){
 int main(){
     printf("%d",div(1236,24));
 }
+
